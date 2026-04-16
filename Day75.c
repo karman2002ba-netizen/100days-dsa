@@ -1,0 +1,35 @@
+#include <stdio.h>
+
+int longestZeroSumSubarray(int arr[], int n) {
+    int maxLen = 0;
+
+    for (int i = 0; i < n; i++) {
+        int sum = 0;
+        for (int j = i; j < n; j++) {
+            sum += arr[j];
+            if (sum == 0) {
+                int len = j - i + 1;
+                if (len > maxLen)
+                    maxLen = len;
+            }
+        }
+    }
+
+    return maxLen;
+}
+
+int main() {
+    int n;
+
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    int arr[n];
+    printf("Enter %d elements: ", n);
+    for (int i = 0; i < n; i++)
+        scanf("%d", &arr[i]);
+
+    printf("Longest zero-sum subarray length: %d\n", longestZeroSumSubarray(arr, n));
+
+    return 0;
+}
