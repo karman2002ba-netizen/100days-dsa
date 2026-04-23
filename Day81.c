@@ -1,47 +1,33 @@
 #include <stdio.h>
 
-#define N 100
-#define INF 1000000000
-
 int main() {
     int n;
+
+    // Input size
     scanf("%d", &n);
 
-    int dist[N][N];
+    int arr[n];
 
-    // Input
+    // Input elements
     for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            scanf("%d", &dist[i][j]);
+        scanf("%d", &arr[i]);
+    }
 
-            if (dist[i][j] == -1 && i != j) {
-                dist[i][j] = INF;  // no edge
+    // Bubble Sort
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                // Swap
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
             }
         }
     }
 
-    // Floyd-Warshall
-    for (int k = 0; k < n; k++) {
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (dist[i][k] < INF && dist[k][j] < INF) {
-                    if (dist[i][j] > dist[i][k] + dist[k][j]) {
-                        dist[i][j] = dist[i][k] + dist[k][j];
-                    }
-                }
-            }
-        }
-    }
-
-    // Output
+    // Output sorted array
     for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (dist[i][j] == INF)
-                printf("-1 ");
-            else
-                printf("%d ", dist[i][j]);
-        }
-        printf("\n");
+        printf("%d ", arr[i]);
     }
 
     return 0;
